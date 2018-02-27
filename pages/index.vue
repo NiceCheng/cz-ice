@@ -7,6 +7,7 @@
       <div class="footerpad"></div>
     </div>
     <div class="footer">
+      {{visits}}
       <pfooter/>
     </div>
   </div>
@@ -20,8 +21,18 @@ import indexpc from '../components/indexpc';
 
 export default {
   name: 'app',
+  middleware: 'wechat-auth',
+  scrollToTop: true,
   components: {
     pheader,psearch,pfooter,indexpc
+  },
+  computed: {
+    visits() {
+      return this.$store.state.url
+    }
+  },
+  async asyncData ({ app }) {
+    
   }
 }
 </script>

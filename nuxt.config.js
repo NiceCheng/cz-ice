@@ -7,17 +7,25 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      { hid: 'description', name: 'description', content: '我的微信测试' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  plugins: ['~plugins/element-ui','~plugins/vue-resource'],
+  plugins: ['~plugins/element-ui'],
+  /*
+  ** 路由设置
+  */
+  router: {
+    middleware: 'auth',
+    middleware: 'wechat-auth'
+  }, 
   /*
   ** Global CSS
   */
   css: ['~assets/css/reset.css',
+        '~assets/css/main.css',
         { src: '~assets/common/stylus/index.styl', lang: 'stylus' } // 指定 scss 而非 sass
        ],
   /*
@@ -28,6 +36,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    vendor: ['axios']
     /*
      ** Run ESLINT on save
      */
@@ -41,5 +50,15 @@ module.exports = {
     //     })
     //   }
     // }
-  }
+  },
+  modules: [
+      '@nuxtjs/axios',
+      '@nuxtjs/proxy'
+  ],
+  proxy: [
+      ['/api', { 
+          target: 'http://zhongzhng.qicp.io:16097',
+          pathRewrite: { '^/api' : '/' }
+      }]
+  ]
 }

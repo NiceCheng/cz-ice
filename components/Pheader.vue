@@ -19,7 +19,7 @@
                 <router-link :to="{ path: '/' }">首页</router-link>
             </div>
             <div class="tab-item">
-                <router-link :to="{ path: '/ratings' }">公司</router-link>
+                <router-link :to="{ path: '/about' }">公司</router-link>
             </div>
             <div class="tab-item">
                 <router-link :to="{ path: '/seller' }">职业</router-link>
@@ -64,6 +64,7 @@
 </template>
 <script>
 export default {
+  middleware: 'auth',
   data() {
       return {
           login : true,
@@ -73,19 +74,19 @@ export default {
           city:"全国"
       }
   },
-  created() {
-//         let options={
-//             enableHighAccuracy:true, //boolean 是否要求高精度的地理信息，默认为false
-//             maximumAge:1000 //应用程序的缓存时间
-//         }
-//        
-//         if(navigator.geolocation){
-//             //浏览器支持geolocation
-//             navigator.geolocation.getCurrentPosition(this.showPosition,this.onError,options);
-//         }else{
-//             //浏览器不支持geolocation
-//             console.log("浏览器不支持!");
-//         }
+  mounted() {
+        let options={
+            enableHighAccuracy:true, //boolean 是否要求高精度的地理信息，默认为false
+            maximumAge:1000 //应用程序的缓存时间
+        }
+       
+        if(navigator.geolocation){
+            //浏览器支持geolocation
+            navigator.geolocation.getCurrentPosition(this.showPosition,this.onError,options);
+        }else{
+            //浏览器不支持geolocation
+            console.log("浏览器不支持!");
+        }
   },
   methods: {
     showPosition(position){

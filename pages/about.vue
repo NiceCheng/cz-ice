@@ -23,6 +23,10 @@ export default {
     return {
       title: `About Page (${this.name}-side)`
     }
+  },
+  mounted: function(){
+    alert(this.$store.state.user)
+    console.log(this.$store.state.user)
   }
 }
 </script>
